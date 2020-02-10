@@ -5,7 +5,7 @@ import telebot
 from telebot.types import Message
 
 import config
-import game_text
+import get_game_text_from_sqlite3
 import inline_keyboard_button
 
 bot = telebot.TeleBot(config.TOKEN)
@@ -31,7 +31,7 @@ def start_game_text(message: Message):
     """
     bot.send_message(
         message.chat.id,
-        game_text.PIZZA["start game"].format(message.chat.first_name, message.text),
+        get_game_text_from_sqlite3.PIZZA["start game"].format(message.chat.first_name, message.text),
         reply_markup=inline_keyboard_button.get_base_inline_keyboard()
     )
 
