@@ -1,0 +1,7 @@
+bin/
+.idea/
+lib/
+pyvenv.cfg/
+include/
+lib64/
+__pycache__/
