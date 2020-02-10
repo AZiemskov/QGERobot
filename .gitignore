@@ -2,7 +2,6 @@
 __pycache__/
 *.py[cod]
 *$py.class
-
 # C extensions
 *.so
 
@@ -16,6 +15,7 @@ eggs/
 .eggs/
 lib/
 lib64/
+lib64
 parts/
 sdist/
 var/
@@ -28,7 +28,7 @@ share/python-wheels/
 MANIFEST
 bin/
 .idea/
-pyvenv.cfg/
+pyvenv.cfg
 include/
 
 # PyInstaller
