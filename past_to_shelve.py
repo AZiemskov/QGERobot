@@ -1,5 +1,10 @@
-# -*- coding: utf-8 -*-
+"""
+Модуль берет из SQLite3
+"""
 import shelve
+
+from telebot import types
+
 from get_game_text_from_sqlite3 import SQLighter
 from config import SHELVE_NAME, DATABASE_NAME
 
@@ -7,7 +12,7 @@ from config import SHELVE_NAME, DATABASE_NAME
 def count_rows():
     """
     Данный метод считает общее количество строк в базе данных и сохраняет в хранилище.
-    Потом из этого количества будем выбирать музыку.
+    Потом из этого количества будем создавать страницы игры.
     """
     db = SQLighter(DATABASE_NAME)
     rowsnum = db.count_rows()
@@ -58,3 +63,22 @@ def get_answer_for_user(chat_id):
         # Если человек не играет, ничего не возвращаем
         except KeyError:
             return None
+
+
+def generate_markup(answer):
+    """
+    Создаем кастомную клавиатуру для выбора ответа
+    :param answer: Разветвление меню выбора
+    :return: Объект кастомной клавиатуры
+    """
+    markup = types.ReplyKeyboardMarkup(one_time_keyboard=True, resize_keyboard=True)
+    # Склеиваем правильный ответ с неправильными
+    all_answers = '{}'.format(answer)
+    # Создаем лист (массив) и записываем в него все элементы
+    list_items = []
+    for item in all_answers.split("&"):
+        list_items.append(item)
+    # Заполняем разметку перемешанными элементами
+    for item in list_items:
+        markup.add(item)
+    return markup
